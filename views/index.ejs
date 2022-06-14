@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/index.css">
+    <title><%= title %></title>
+</head>
+<body>
+    <div id="container">
+    <h1>To-Do App</h1>
+    <form action="/addtask" method="post">
+        <div id="desc">
+            <label for="desc">Task Description</label>
+            <input type="text" name="desc" id="desc" required>
+        </div>
+        <div id="categ">
+            <label for="categ">Category</label>
+            <select name="categ" id="categ">
+                <option value="Misc">Select a category</option>
+                <option value="Work">Work</option>
+                <option value="Personal">Personal</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+        <div id="date">
+            <label for="date">Due Date</label>
+            <input type="date" name="date" id="date">
+            <label for="priority">Priority</label>
+            <select name="priority" id="priority">
+                <option value="low-prior">Select a priority</option>
+                <option value="low-prior">Low</option>
+                <option value="med-prior">Medium</option>
+                <option value="high-prior">High</option>
+            </select>
+        </div>
+        <div id="submit">
+            <input type="submit" value="Add Task">
+        </div>
+    </form>
+    <hr>
+    <div id="tasks">
+        <ul id="task-list">
+        <% for (let task of tasks) { %> 
+            <li class="<%= task.priority %>">
+                <div id="task-data">
+                    <p><%= task.desc %></p>
+                    <p><%= task.date %></p>
+                </div>
+                <div id="task-categ">
+                    <%= task.categ %>
+                </div>
+                <a href="/deletetask/?id=<%= task.id %>">Done</a>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
